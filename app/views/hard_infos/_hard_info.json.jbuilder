@@ -1,0 +1,2 @@
+json.extract! hard_info, :id, :denban, :store_name, :worker_name, :address, :tel, :fax, :connection_current, :connection_max, :remark, :created_at, :updated_at, :introduction_date, :time_passed, :due_date, :time_remaining, :sales_person, :delivery_person, :superviser, :project_person, :program_person, :id_issued, :sc_count, :remote, :supervision_count, :hoshu, :person_in_charge, :company_tel, :sales_no, :lookup_no, :so_name, :so_address, :so_pic, :so_tel, :so_fax, :c_email, :use_case_no, :client_name, :product_name, :mod
+json.url hard_info_url(hard_info, format: :json)

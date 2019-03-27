@@ -1,0 +1,11 @@
+<div class="container">
+	<!--links-->
+	<%= link_to 'Back', use_case_path(@client_info.use_case_id) %><%= ' | ' %><%= link_to 'TOP', root_path %>
+	<!--end links-->
+	<h1><%= "情報内容更新" %></h1>
+
+	<%= render 'form', client_info: @client_info %>
+</div>
+
+
+

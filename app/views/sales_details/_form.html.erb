@@ -1,0 +1,73 @@
+<%= form_with(model: sales_detail, local: true) do |form| %>
+  <% if sales_detail.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(sales_detail.errors.count, "error") %> prohibited this sales_detail from being saved:</h2>
+
+      <ul>
+      <% sales_detail.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <!--hidden fields-->
+  <div class="field">
+    <%= form.hidden_field :use_case_no %>
+  </div>
+  <!--end hidden fields-->
+
+
+  <div class="row" >
+    <div class="col d-flex justify-content-start">
+      <!--links-->
+      <%=" | "%><%= link_to 'TOP', root_path %><%=" | "%><%= link_to 'ユーザー一覧', use_cases_path %><%=" | "%><%= link_to '作業一覧', works_path %><%=" | "%>
+      <!--end links-->
+    </div>
+    <div class="col d-flex justify-content-end">
+      <%if(params.has_key?(:id))%>
+        <%= link_to 'キャンセル', sales_detail_path, :class=> 'btn btn-link ' %>
+      <%else%>
+        <%= link_to 'キャンセル', use_case_path(id: params[:use_case_id]), :class=> 'btn btn-link ' %>
+      <%end%>
+    </div>
+    <div class="actions ">
+      <!--passing param to controller for makeing association-->
+      <%= hidden_field_tag(:use_case_no, @sales_detail.use_case_no) %>
+      <!---->
+      <%= form.submit 'セーフ', :class=> 'btn btn-link '%>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col title_bar">
+      <%= "売上明細編集"%>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <div>
+        <table class="table table-bordered table-sm">
+          <thead>
+            <tr>
+              <th>No</th>
+              <th>日付</th>
+              <th>名称</th>
+              <th>売上額</th>
+              <th>改造費</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>            
+              <td><%= form.text_field :sd_no, :size =>"4" %></td>
+              <td><%= form.text_field :date, :size =>"10" %></td>
+              <td><%= form.text_field :product_name, :size =>"10" %></td>
+              <td><%= form.text_field :sales_amount, :size =>"10" %></td>
+              <td><%= form.text_field :customize_cost, :size =>"10" %></td>           
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+<% end %>

@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  division: MyString
+  number: 1
+  date: MyString
+  client_name: MyString
+  product_name: MyString
+  mod: MyString
+  address: MyString
+  store: MyString
+  memo: MyText
+
+two:
+  division: MyString
+  number: 1
+  date: MyString
+  client_name: MyString
+  product_name: MyString
+  mod: MyString
+  address: MyString
+  store: MyString
+  memo: MyText

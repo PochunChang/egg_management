@@ -1,0 +1,60 @@
+<div class="container">
+  <div class="row">
+    <div class="col d-flex justify-content-start">
+      <!--links-->
+      <%=" | "%><%= link_to 'TOP', root_path %><%=" | "%><%= link_to 'ユーザー一覧', use_cases_path %><%=" | "%>
+      <!--end links-->
+    </div>
+    <div class="col d-flex justify-content-end">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col title_bar">
+      <%= "作業一覧"%>
+    </div>
+  </div>
+  <div class="row">
+    <table class="table table-bordered table-sm">
+      <thead class="thead-light">
+        <tr>
+          <th>NO</th>
+          <th width="150">日時</th>
+          <th>ユーザー名</th>
+          <th>区分</th>
+          <th>対応者</th>
+          <th>KCT</th>
+          <th>件名</th>
+          <th width="400">内容</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @works.each do |work| %>
+          <tr>
+            <td><%= link_to work.use_case_no, use_case_path(work.use_cases.first) %><br /><%= link_to work.work_no, work %></td>
+            <td><%= work.updated_at %></td>
+            <td><%= work.client_name %></td>
+            <td><%= work.classification %></td>
+            <td><%= work.worker_name %></td>
+            <td><%= work.kct%></td>
+            <td><%= work.subject %></td>
+            <td><%= work.content %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+  <div class="row">
+    <!--search-->
+    <div class="col d-flex justify-content-start">
+    <%= form_tag works_path, :method => 'get' do %>
+      <%= text_field_tag :search, params[:search] %>
+      <%= submit_tag "検索" %>
+    <% end %>
+    </div>
+    <!--pagination-->
+    <div class="col d-flex justify-content-end">
+      <%= paginate @works %>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,86 @@
+<div class="container">
+	<div class="row" >
+		<div class="col d-flex justify-content-start">
+		  <!--links-->
+		  <%=" | "%><%= link_to 'TOP', root_path %><%=" | "%><%= link_to 'ユーザー一覧', use_cases_path %><%=" | "%><%= link_to '作業一覧', works_path %><%=" | "%>
+		  <!--end links-->
+		</div>
+		<div class="col d-flex justify-content-end">
+		  <%=" | "%><%= link_to '編集', edit_use_case_ledger_path %><%=" | "%><%= link_to '削除', @use_case_ledger, method: :delete, data: { confirm: 'Are you sure?' } %><%=" | "%>
+		</div>
+	</div>
+  	<!--page header-->
+	<div class="row">
+		<div class="col title_bar">
+		  <%= "ユーザー台帳"%>
+		</div>
+	</div>
+	<div class="row">
+	    <div class="col">
+	      <table class="table table-bordered table-sm">
+	        <thead class="thead-light">
+	          <tr>
+	            <th>コード</th><td><%= @use_case_ledger.use_case_code %></td>
+	          </tr>
+	          <tr>
+	            <th>名称</th><td><%= @use_case_ledger.c_name %></td>
+	          </tr>
+	          <tr>
+	            <th>フリガナ</th><td><%= @use_case_ledger.c_furigana %></td>
+	          </tr>
+	          <tr>
+	            <th>正式名称</th><td><%= @use_case_ledger.c_official_name %></td>
+	          </tr>
+	          <tr>
+	            <th>担当者名</th><td><%= @use_case_ledger.c_pic %></td>
+	          </tr>
+	          <tr>
+	            <th>代表者</th><td><%= @use_case_ledger.c_rep_role %><%=" "%><%= @use_case_ledger.c_rep_last_name %><%=" "%><%= @use_case_ledger.c_rep_first_name %></td>
+	          </tr>
+	          <tr>
+	            <th>区分</th><td><%= @use_case_ledger.c_office %></td>
+	          </tr>
+	          <tr>
+	            <th>〒</th><td><%= @use_case_ledger.c_postal_code %></td>
+	          </tr>
+	          <tr>
+	            <th>住所1</th><td><%= @use_case_ledger.c_address1 %></td>
+	          </tr>
+	          <tr>
+	            <th>住所2</th><td><%= @use_case_ledger.c_address2 %></td>
+	          </tr>
+	          <tr>
+	            <th>住所3</th><td><%= @use_case_ledger.c_address3 %></td>
+	          </tr>
+	          <tr>
+	            <th>電話</th><td><%= @use_case_ledger.c_tel %></td>
+	          </tr>
+	          <tr>
+	            <th>FAX</th><td><%= @use_case_ledger.c_fax %></td>
+	          </tr>
+	          <tr>
+	            <th>ホームページ</th><td><%= @use_case_ledger.c_homepage %></td>
+	          </tr>
+	          <tr>
+	            <th>Email</th><td><%= @use_case_ledger.c_email %></td>
+	          </tr>
+	            
+	            
+	            
+	            
+	            
+	            
+	            
+	            
+	            
+	            
+	            
+	            
+	            
+	            
+	          </tr>
+	        </thead>
+	      </table>
+	    </div>
+  	</div>
+</div>

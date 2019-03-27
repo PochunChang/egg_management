@@ -1,0 +1,39 @@
+<div class="container">
+	<div class="row">
+	    <div class="col d-flex justify-content-start">
+	      <!--links-->
+	      <%=" | "%><%= link_to 'TOP', root_path %><%=" | "%>
+	      <!--end links-->
+	    </div>
+	    <div class="col d-flex justify-content-end">
+	      <%=" | "%><%= link_to '追加', new_use_case_ledger_path %><%=" | "%>
+	    </div>
+	  </div>
+	  <div class="row">
+	    <div class="col title_bar">
+	      <%= "ユーザー台帳"%>
+	    </div>
+	  </div>
+	  <div class="row">
+	    <table class="table table-bordered table-sm">
+	      <thead class="thead-light">
+	        <tr>
+	          <th width="100">コード</th>
+	          <th>名称</th>
+	          <th>電話</th>
+	        </tr>
+	      </thead>
+
+	      <tbody>
+	        <% @use_case_ledgers.each do |ucl| %>
+	          <tr>
+	          	<td><%= link_to ucl.use_case_code, ucl %></td>
+	            <td><%= ucl.c_name %></td>
+	            <td><%= ucl.c_tel %></td>
+	          </tr>
+	        <% end %>
+	      </tbody>
+	    </table>
+	  </div>
+	</div>
+</div>

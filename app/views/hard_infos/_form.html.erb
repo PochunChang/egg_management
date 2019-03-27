@@ -1,0 +1,170 @@
+<%= form_with(model: hard_info, local: true) do |form| %>
+  <% if hard_info.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(hard_info.errors.count, "error") %> prohibited this hard_info from being saved:</h2>
+
+      <ul>
+      <% hard_info.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
+  <!--hidden fields-->
+  <div class="field">
+    <%= form.hidden_field :use_case_no %>
+  </div>
+  <!--end hidden fields-->
+
+
+
+  <div class="row" >
+    <div class="col d-flex justify-content-start">
+      <!--links-->
+      <%=" | "%><%= link_to 'TOP', root_path %><%=" | "%><%= link_to 'ユーザー一覧', use_cases_path %><%=" | "%><%= link_to '作業一覧', works_path %><%=" | "%>
+      <!--end links-->
+    </div>
+    <div class="col d-flex justify-content-end">
+      <%if(params.has_key?(:id))%>
+        <%= link_to 'キャンセル', hard_info_path, :class=> 'btn btn-link ' %>
+      <%else%>
+        <%= link_to 'キャンセル', use_case_path(id: params[:use_case_id]), :class=> 'btn btn-link ' %>
+      <%end%>
+    </div>
+    <div class="actions ">
+      <!--passing param to controller for makeing association-->
+      <%= hidden_field_tag(:use_case_id, params[:use_case_id]) %>
+      <%= hidden_field_tag(:use_case_no, @hard_info.use_case_no) %>
+      <!---->
+      <%= form.submit 'セーフ', :class=> 'btn btn-link' %>
+    </div>
+  </div>
+  <!--page header-->
+  <div class="row">
+    <div class="col title_bar_hard">
+      <%= "ハード情報編集"%>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col align-self-center">
+      <!--bunch of No.-->
+      <div>
+        <%=" | "%><%= @hard_info.use_case_no %>
+        <%=" | "%><%="売No."%><%= @hard_info.sales_no %>
+        <%=" | "%><%="見No."%><%= @hard_info.lookup_no %>
+        <%=" | "%>  
+      </div>
+    </div>
+    <!--progress table-->
+    <div class="col">
+      <div>
+        <table class="table table-bordered table-sm">
+          <thead class="thead-light">
+            <tr>
+              <th>導入日</th>
+              <th>経過</th>
+              <th>期限</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><%= @hard_info.introduction_date %></td>
+              <td><%= @hard_info.time_passed %></td>
+              <td><%= @hard_info.due_date %></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <!--person in charge table-->
+    <div class="col">
+      <div>
+        <table class="table table-bordered table-sm" style="font-size: 14px">
+          <thead class="thead-light">
+            <tr>
+              <th>営業担当</th>
+              <th>納品担当</th>
+              <th>指導担当</th>
+              <th>ﾌﾟﾛｼﾞｪｸﾄR</th>
+              <th>ﾌﾟﾛｸﾞﾗﾑ</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><%= @hard_info.sales_person %></td>
+              <td><%= @hard_info.delivery_person %></td>
+              <td><%= @hard_info.superviser %></td>
+              <td><%= @hard_info.project_person %></td>
+              <td><%= @hard_info.program_person %></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <!--client name and product name-->
+  <div class="row">
+    <div class="col use_case_name_box">
+      <div>
+        <b><%= @hard_info.client_name %></b><br />
+        <b><%= @hard_info.product_name %><%=" / "%><%= @hard_info.mod %></b>
+      </div>
+    </div>
+    <!--id and connection table-->
+    <div class="col">
+      <div>
+        <div><%="【 ID発行数："%><%= form.text_field :id_issued, :size =>"2" %><%=" / "%><%="同時接続数："%><%= form.text_field :sc_count, :size =>"2" %><%=" 】"%></div>
+        <table class="table table-bordered table-sm">
+          <thead class="thead-light">
+            <tr>
+              <th>TEL</th><td><%= @hard_info.tel %></td>
+              <th>ﾘﾓｰﾄ</th><td><%= @hard_info.remote %></td>
+              <th>指導</th><td><%= @hard_info.supervision_count %>回</td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th style="background-color:  whitesmoke">保　守</th><td class="text-center" colspan="5"><%= @hard_info.hoshu %></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <!--store table-->
+    <div class="col">
+      <div>
+        <table class="table table-bordered table-sm">
+          <thead class="thead-light">
+            <tr>
+              <th rowspan="2" width="60">販売店</th><td><%= @hard_info.so_name %></td><th>担当者</th><td><%= @hard_info.so_pic %></td>
+            </tr>
+            <tr>
+              <td colspan="3">
+                <%= @hard_info.so_address1 %>
+                <%= @hard_info.so_address2 %>
+                <%= @hard_info.so_address3 %><br />
+                TEL: <%= @hard_info.so_tel %> FAX: <%= @hard_info.so_fax %>
+              </td>         
+            </tr>
+          </thead>
+        </table>
+      </div>
+    </div>
+  </div>
+  <!--hard infos table-->
+  <div class="row">
+    <div class="col">
+      <p>
+        <%= @hard_info.c_address1 %><%= @hard_info.c_address2 %><%= @hard_info.c_address3 %>
+        <strong><%= " TEL：" %></strong><%= @hard_info.c_tel %>
+        <strong><%= " FAX：" %></strong><%= @hard_info.c_fax %>
+        <strong><%= " 担当：" %></strong><%= @hard_info.c_pic %>
+        <strong><%= " E-Mail：" %></strong><%= @hard_info.c_email %><br />
+        <strong><%= " 備考：" %></strong><%= @hard_info.remark %>
+      </p>
+    </div>
+  </div>
+<% end %>
+

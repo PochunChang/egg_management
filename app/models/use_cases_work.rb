@@ -1,0 +1,2 @@
+class UseCasesWork < ApplicationRecord
+end

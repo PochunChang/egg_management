@@ -1,0 +1,272 @@
+<%= form_with(model: use_case, local: true) do |form| %>
+  <% if use_case.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(use_case.errors.count, "error") %> prohibited this use_case from being saved:</h2>
+
+      <ul>
+      <% use_case.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
+
+
+
+
+
+  
+
+
+  <div class="row">
+    <div class="col d-flex justify-content-start ">      
+      <%=" | "%><%= link_to 'TOP', root_path %><%=" | "%><%= link_to 'ユーザー一覧', use_cases_path %><%=" | "%>
+    </div>
+    <div class="col d-flex justify-content-end">
+      <%if(params.has_key?(:id))%>
+        <%= link_to 'キャンセル', use_case_path, :class=> 'btn btn-link ' %>
+      <%else%>
+        <%= link_to 'キャンセル', use_cases_path, :class=> 'btn btn-link ' %>
+      <%end%>
+    </div>
+    <div class="actions ">
+      <!--passing param to controller for makeing association-->
+      <%= hidden_field_tag(:use_case_no, @use_case.use_case_no) %>
+      <!---->
+      <%= form.submit 'セーフ', :class=> 'btn btn-link'%>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col title_bar">
+      <%= "ユーザー編集"%>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col align-self-center">
+      <!--bunch of No.-->
+      <div>
+        <%="コード:"%><%= form.text_field :use_case_code, id: 'use_case_code_field', :required => true, :size =>"4"%> <br />
+        <%="No."%><%= form.text_field :use_case_no, :size =>"4"  %>
+        <%="売No."%><%= form.text_field :sales_no, :size =>"4"  %>
+        <%="見No."%><%= form.text_field :lookup_no, :size =>"4"  %>
+        <%="作No."%><%= form.text_field :project_no, :size =>"4"%>
+      </div>
+    </div>
+    <!--progress table-->
+    <div class="col">
+      <div>
+        <table class="table table-bordered table-sm">
+          <thead class="thead-light">
+            <tr>
+              <th>導入日</th>
+              <th>経過</th>
+              <th>期限</th>
+              <th>残期間</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><%= form.text_field :introduction_date, :size =>"5x5" %></td>
+              <td><%= form.text_field :time_passed, :size =>"1" %></td>
+              <td><%= form.text_field :due_date, :size =>"8x5" %></td>
+              <td><%= form.text_field :time_remaining, :size =>"1" %>ヶ月</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <!--person in charge table-->
+    <div class="col">
+      <div>
+        <table class="table table-bordered table-sm" style="font-size: 14px">
+          <thead class="thead-light">
+            <tr>
+              <th>営業担当</th>
+              <th>納品担当</th>
+              <th>指導担当</th>
+              <th>ﾌﾟﾛｼﾞｪｸﾄR</th>
+              <th>ﾌﾟﾛｸﾞﾗﾑ</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><%= form.text_field :sales_person, :size =>"5x5" %></td>
+              <td><%= form.text_field :delivery_person, :size =>"5x5" %></td>
+              <td><%= form.text_field :superviser, :size =>"5x5" %></td>
+              <td><%= form.text_field :project_person, :size =>"5x5" %></td>
+              <td><%= form.text_field :program_person, :size =>"5x5" %></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col use_case_name_box">
+      <div>
+        <div><%= form.text_field :client_name, id: 'client_name_field', :size =>"20x5"  %></div><br />
+        <div><%= form.text_field :product_name, :size =>"20x5"  %><%= form.text_field :mod, :size =>"1"  %></div>
+      </div>
+    </div>
+    <!--id and connection table-->
+    <div class="col">
+      <div>
+        <div>
+
+        </div>
+        <table class="table table-bordered table-sm">
+          <thead class="thead-light">
+            <tr>
+              <th>TEL</th><td><%= form.text_field :tel, :size =>"1"%></td>
+              <th>ﾘﾓｰﾄ</th><td><%= form.text_field :remote, :size =>"1"  %></td>
+              <th>指導</th><td><%= form.text_field :supervision_count, :size =>"1"  %>回</td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th style="background-color:  whitesmoke">保　守</th><td class="text-center" colspan="5"><%= form.text_field :hoshu %></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <!--for hard infos and division-->
+      <div>
+
+        <%= "伝番: " %><%= form.text_field :denban, :size =>"5" %>
+        <%= "???"%><%= form.text_field :division, :size =>"2"%>
+      </div>
+    </div>
+    <!--store table-->
+    <div class="col">
+        <table class="table table-bordered table-sm">
+          <thead class="thead-light">
+            <tr>
+              <th rowspan="2" width="60">販売店</th><td><%= form.text_field :so_name, :size =>"8"%></td><th>担当者</th><td><%= form.text_field :so_pic, :size =>"8"%></td>
+            </tr>
+            <tr>
+              <td colspan="3">
+                <%= form.text_field :so_address1, :size =>"30"%><br />
+                <%= form.text_field :so_address2, :size =>"30"%><br />
+                <%= form.text_field :so_address3, :size =>"30"%><br />
+                TEL: <%= form.text_field :so_tel, :size =>"8"%> FAX: <%= form.text_field :so_fax, :size =>"8"%>
+              </td>         
+            </tr>
+            <tr>
+              <th>販  社</th><td colspan="3"><%= form.text_field :sc_name, :size =>"10"%>TEL:<%= form.text_field :sc_tel, :size =>"10"%></td>        
+            </tr>
+          </thead>
+        </table>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-4">
+      <table>
+        <thead>
+          <th><%= "MEMO"%></th>
+        </thead>
+        <tbody>
+          <td><%= form.text_area :memo, :size =>"50x5"%></td>
+        </tbody>
+      </table>
+      
+    </div>
+    <div class="col-8">
+      <div>
+        <%= "区分: " %><%= form.text_field :c_office, id: 'c_office_field', :size =>"5"%><%= "備考: " %><%= form.text_field :remark, :size =>"30"%>
+      </div>
+      <table class="table table-bordered table-sm">
+          <thead class="thead-light">
+            <tr>
+              <th width="60">担当者</th><td><%= form.text_field :c_pic, id: 'c_pic_field', :size =>"15"%></td>
+              <th>E-Mail</th><td><%= form.text_field :c_email, id: 'c_email_field', :size =>"20"%></td>
+            </tr>
+            <tr>
+              <th>住所</th>
+              <td colspan="3">
+                〒:<%= form.text_field :c_postal_code, id: 'c_postal_code_field', :size =>"15"%><br />
+                <%= form.text_field :c_address1, id: 'c_address1_field', :size =>"20"%>
+                <%= form.text_field :c_address2, id: 'c_address2_field', :size =>"20"%>
+                <%= form.text_field :c_address3, id: 'c_address3_field', :size =>"20"%><br />
+                TEL: <%= form.text_field :c_tel, id: 'c_tel_field', :size =>"15"%> FAX: <%= form.text_field :c_fax, id: 'c_fax_field', :size =>"15"%>
+              </td>        
+            </tr>
+          </thead>
+      </table>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <!--extra info-->
+      <div style="font-size: 14px">
+        <p>
+          <strong><%='[情報]'%></strong>
+          <strong><%='業種：'%></strong><%= form.text_field :industry, :size =>"1"%>
+          <strong><%='扱い商品：'%></strong><%= form.text_field :service_product, :size =>"1"%>
+          <strong><%='商品点数：'%></strong><%= form.text_field :product_count, :size =>"1"%>
+          <strong><%='得意先件数：'%></strong><%= form.text_field :customer_count, :size =>"1"%><%='件'%>
+          <strong><%='仕入(傭車)先件数：'%></strong><%= form.text_field :vendor_count, :size =>"1"%><%='件'%>
+          <strong><%='車両台数：'%></strong><%= form.text_field :vehicle_count, :size =>"1"%><%='台'%>
+          <strong><%='担当者(乗務員)数：'%></strong><%= form.text_field :driver_count, :size =>"1"%><%='人'%>
+        </p>
+      </div>
+      <!--extra info-->
+    </div>    
+  </div>
+  <hr>
+
+ 
+
+
+<% end %>
+
+<!--for auto filling form after inputing code-->
+<script type="text/javascript">
+  var container_obj = [];
+  var object = {};
+
+  <% @use_case_ledgers.each do |ucl| %>
+    object = {};
+    object['c_name'] = "<%= ucl.c_name %>";
+    object['use_case_code'] = "<%= ucl.use_case_code %>";
+    object['c_office'] = "<%= ucl.c_office %>";
+    object['c_pic'] = "<%= ucl.c_pic %>";
+    object['c_email'] = "<%= ucl.c_email %>";
+    object['c_postal_code'] = "<%= ucl.c_postal_code %>";
+    object['c_address1'] = "<%= ucl.c_address1 %>";
+    object['c_address2'] = "<%= ucl.c_address2 %>";
+    object['c_address3'] = "<%= ucl.c_address3 %>";
+    object['c_tel'] = "<%= ucl.c_tel %>";
+    object['c_fax'] = "<%= ucl.c_fax %>";
+    container_obj.push(object);
+  <%end%>
+  
+  $('#use_case_code_field').change(function(){
+    var select = $(this);
+    var ans = {};
+
+    for(var i = 0; i < container_obj.length; i++){
+      if(container_obj[i]['use_case_code'] == select.val()){
+        ans = container_obj[i];
+        break;
+      }
+    }
+
+
+
+    $('#client_name_field').val(ans['c_name']);
+    $('#c_office_field').val(ans['c_office']);
+    $('#c_pic_field').val(ans['c_pic']);
+    $('#c_email_field').val(ans['c_email']);
+    $('#c_postal_code_field').val(ans['c_postal_code']);
+    $('#c_address1_field').val(ans['c_address1']);
+    $('#c_address2_field').val(ans['c_address2']);
+    $('#c_address3_field').val(ans['c_address3']);
+    $('#c_tel_field').val(ans['c_tel']);
+    $('#c_fax_field').val(ans['c_fax']);
+
+
+
+  });
+</script>

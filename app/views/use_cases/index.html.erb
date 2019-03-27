@@ -1,0 +1,102 @@
+<div class="container">
+  <div class="row">
+    <div class="col d-flex justify-content-start">
+      <!--links-->
+      <%=" | "%><%= link_to 'TOP', root_path %><%=" | "%><%= link_to '作業一覧', works_path %><%=" | "%>
+      <!--end links-->
+    </div>
+    <div class="col d-flex justify-content-end">
+      <%=" | "%><%= link_to '追加', new_use_case_path %><%=" | "%>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col title_bar">
+      <%= "ユーザー一覧"%>
+    </div>
+  </div>
+  <div class="row">
+    <table class="table table-bordered table-sm">
+      <thead class="thead-light">
+        <tr>
+          <th></th>
+          <th>NO</th>
+          <th>納品日</th>
+          <th>ユーザー名</th>
+          <th>製品名</th>
+          <th>改造</th>
+          <th>都道府県</th>
+          <th>販売店</th>
+          <th>備考</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @use_cases.reverse_each do |use_case| %>
+          <tr>
+            <td><%= use_case.division %></td>
+            <td><%= link_to use_case.use_case_no, use_case %></td>
+            <td><%= use_case.introduction_date %></td>
+            <td><%= use_case.client_name %></td>
+            <td><%= use_case.product_name %></td>
+            <td><%= use_case.mod %></td>
+            <td><%= use_case.c_address1 %></td>
+            <td><%= use_case.so_name %></td>
+            <td><%= use_case.remark %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+  <div class="row">
+    <!--search-->
+    <div class="col d-flex justify-content-start">
+    <%= form_tag use_cases_path, :method => 'get' do %>
+      <%= text_field_tag :search, params[:search] %>
+      <%= submit_tag "検索" %>
+    <% end %>
+    </div>
+    <!--pagination-->
+    <div class="col d-flex justify-content-end">
+      <%= paginate @use_cases %>
+    </div>
+  </div>
+  
+
+  
+
+  
+
+
+</div>
+
+<!--dataTable test-->
+<%if false%>
+  <div class="container">
+    <!--links-->
+    <%= link_to 'TOP', root_path %>
+    <!--end links-->
+    <h1>ユーザー一覧</h1>
+    <table id="use_cases_datatable" data-source="<%= use_cases_path(format: :json) %>">
+      <thead>
+        <tr>
+          <th></th>
+          <th>NO</th>
+          <th>納品日</th>
+          <th>ユーザー名</th>
+          <th>製品名</th>
+          <th>改造</th>
+          <th>都道府県</th>
+          <th>販売店</th>
+          <th>備考</th>
+        </tr>
+      </thead>
+      <tbody>
+
+      </tbody>
+    </table>
+    <br>
+    <%= link_to 'New Use Case', new_use_case_path %>
+  </div>
+<%end%>
+<!--end dataTable test-->
+

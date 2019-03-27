@@ -1,0 +1,180 @@
+<div class="container-fluid w-75">
+  <div class="row">
+    <div class="col d-flex justify-content-start">
+      <!--links-->
+      <%=" | "%><%= link_to 'TOP', root_path %><%=" | "%><%= link_to '作業一覧', works_path %><%=" | "%>
+      <!--end links-->
+    </div>
+    <div class="calendar-heading col d-flex justify-content-end">
+      <!--links-->
+      <%=" | "%><%= link_to '先週', "?start_date=" + @previous_week %><%=" | "%><%= link_to '来週', "?start_date=" + @next_monday %><%=" | "%>
+      <!--end links-->
+    </div>
+  </div>
+  <div class="row">
+    <div class="col title_bar">
+      <%= "スケジュール"%>
+    </div>
+  </div>
+  <!--the schedule table-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <div class="row">
+    <div class="col-1">
+    </div>
+    <div class="col">
+      <table>
+        <thead>
+          <tr>
+              <th class="text-center" width="200">月</th>
+              <th class="text-center" width="200">火</th>
+              <th class="text-center" width="200">水</th>
+              <th class="text-center" width="200">木</th>
+              <th class="text-center" width="200">金</th>
+              <th class="text-center" width="200">土</th>
+              <th class="text-center" width="200">日</th>
+          </tr>
+        </thead>
+      </table>
+    </div>
+  </div>
+  <% @users.each do |user|%>
+    <div class="row">
+      <div class="col-1 align-self-center">
+        <%= user.first_name %><%=" "%><%= user.last_name %>
+      </div>
+      <div class="col" style="font-size: 12px">
+        <%= week_calendar events: user.events, number_of_weeks: 1 do |date, events| %>
+          <!--date-->
+          <%= date %><br />
+          
+          <% events.each do |event| %>
+            <!--time-->
+            <%if event.start_time.to_s(:time) != "00:00"%>
+              <%= event.start_time.to_s(:time) %><%= "～" %><%= event.end_time.to_s(:time) %>
+            <%end%>
+            <br />
+            <div>
+              <!--confirmed-->
+              <%if event.confirmed == false%>
+                <span class="badge badge-secondary">仮</span>
+              <%end%>
+              <!--markup icon-->
+              <%if event.important == true%>
+                <span class="badge badge-danger">重</span>
+              <%end%>
+              <%if event.rest == true%>
+                <span class="badge badge-danger">休</span>
+              <%end%>
+              <%if event.lightbulb == true%>
+                <span style="color: gold"><%= fa_icon('bolt')%></span>
+              <%end%>
+              <%if event.triangle == true%>
+                <span style="color: orange"><%= fa_icon('exclamation-triangle')%></span>
+              <%end%>
+              <%if event.done == true%>
+                <span class="badge badge-info">済</span>
+              <%end%>
+              <%if event.celebrate == true%>
+                <span class="badge badge-danger">祝</span>
+              <%end%>
+              <%if event.star == true%>
+                <span style="color: gold"><%= fa_icon('star')%></span>
+              <%end%>
+              <!--type icon-->
+              <%case event.schedule_type when "デモ"%>
+                <span class="badge badge-primary">デ</span>
+              <%when "商談"%>
+                <span class="badge badge-primary">商</span>
+              <%when "展覧"%>
+                <span class="badge badge-primary">展</span>
+              <%when "勉強"%>
+                <span class="badge badge-primary">勉</span>
+              <%when "納品"%>
+                <span class="badge badge-success">納</span>
+              <%when "?"%>
+                <span class="badge badge-success">?</span>
+              <%when "打ち合わせ"%>
+                <span class="badge badge-success">打</span>
+              <%end%>
+              <!--actual event-->
+              <%= link_to event.title, event_path(event) %>
+            </div>
+          <% end %>
+          <br />
+          <!--add event-->
+          <%= link_to "+", new_event_path(:user_id => user.id, :date => date) %>
+        <% end %>
+      </div>
+    </div>
+  <%end%>
+
+
+    
+      
+
+  
+
+
+
+
+
+
+
+<!--not used-->
+<%if false%>
+  <table class="responsive nowrap table table-hover" id="dttb-events" data-sort="true" data-source="<%= url_for(format: :json)%>">
+    <thead>
+      <tr>
+        <th data-data="title">Title</th>
+        <th data-data="content">Content</th>
+        <th data-data="user">User</th>
+        <th data-data="start_time">Start time</th>
+        <th data-data="end_time">End time</th>
+        <th data-data="url" data-orderable="false" data-class-name="all" data-searchable="false" class="skip-export" width="100px"></th>
+      </tr>
+    </thead>
+
+  </table>
+
+  <br>
+<%end%>
+<%if false%>
+  <div class="row">
+    <div class="col">
+
+
+      
+      <%= week_calendar events: @events, number_of_weeks: 1 do |date, events| %>
+
+        <%= date %><br />
+
+
+        <% events.each do |event| %>
+          <div>
+            <%= link_to event.title, event_path(event) %>
+
+          </div>
+        <% end %>
+
+
+
+      <% end %>
+    </div>
+  </div>
+<%end%>
+
+
+</div>

@@ -1,0 +1,25 @@
+<%= form_with(model: client_info, local: true) do |form| %>
+  <% if client_info.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(client_info.errors.count, "error") %> prohibited this client_info from being saved:</h2>
+
+      <ul>
+      <% client_info.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div>
+    <div class="actions"><%= form.submit %></div>
+    <!--<div><%= "ユーザー名" %><%= form.text_field :client_name %></div>-->
+    <div><%= "業種：" %><%= form.text_field :industry %></div>
+    <div><%= "扱い商品：" %><%= form.text_field :service_product %></div>
+    <div><%= "得意先　　　：" %><%= form.number_field :customer_count %><%= "件" %></div>
+    <div><%= "仕入(傭車)先　　：" %><%= form.number_field :vendor_count %><%= "件" %></div>
+    <div><%= "商品点数　　：" %><%= form.number_field :product_count %><%= "点" %></div>
+    <div><%= "車両　　　　：" %><%= form.number_field :vehicle_count %><%= "台" %></div>
+    <div><%= "従業員(乗務員)　：" %><%= form.number_field :driver_count %><%= "人" %></div>
+  </div>
+<% end %>
+

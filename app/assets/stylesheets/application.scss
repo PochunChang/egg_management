@@ -1,0 +1,26 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require font-awesome
+ *= require simple_calendar
+ */
+ @import "bootstrap";
+ @import "font-awesome";
+ /*style starts here*/
+/*.row {margin: 10px}*/
+.title_bar {background-color: royalblue; color: white; margin-top: 10px; margin-bottom: 10px;}
+.title_bar_hard {background-color: seagreen; color: white; margin-top: 10px; margin-bottom: 10px;}
+.text_middle {vertical-align: middle;}
+.use_case_name_box {background-color: whitesmoke; font-size: 24px; vertical-align: middle;}
+@import "datatables";
+.first{display:none;}
+.last{display:none;}

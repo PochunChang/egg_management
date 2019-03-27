@@ -1,0 +1,55 @@
+<div class="container">
+	<div class="row" >
+	    <div class="col d-flex justify-content-start">
+	      <!--links-->
+	      <%=" | "%><%= link_to 'TOP', root_path %><%=" | "%><%= link_to 'ユーザー一覧', use_cases_path %><%=" | "%><%= link_to '作業一覧', works_path %><%=" | "%>
+	      <!--end links-->
+		</div>
+	    <div class="col d-flex justify-content-end">
+      		<%=" | "%><%= link_to '編集', edit_db_info_path(@db_info) %><%=" | "%><%= link_to '削除', @db_info, method: :delete, data: { confirm: 'Are you sure?' } %><%=" | "%>
+    	</div>
+	</div>
+	<div class="row">
+	    <div class="col title_bar_hard">
+	      <%= "ハード構成"%>
+	    </div>
+	</div>
+	<div class="row">
+	    <div class="col">
+	      <div>
+	        <table class="table table-bordered table-sm">
+	          <thead>
+	            <tr>
+	              <th>No</th>
+	              <th>ｼﾘｱﾙNo</th>
+	              <th>ID</th>
+	              <th>IP</th>
+	              <th>ﾃﾞｰﾀﾍﾞｰｽ名</th>
+	              <th>名称</th>
+	              <th>本体</th>
+	              <th>ﾌﾟﾘﾝﾀ</th>
+	              <th>ﾊﾞｯｸｱｯﾌﾟ</th>
+	              <th>OS</th>
+	            </tr>
+	          </thead>
+	          <tbody>
+	            <tr>            
+	              <td><%= @db_info.db_info_no %></td>
+	              <td><%= @db_info.serial_no %></td>
+	              <td><%= @db_info.identification %></td>
+	              <td><%= @db_info.ip %></td>
+	              <td><%= @db_info.db_name %></td>   
+	              <td><%= @db_info.name %></td>
+	              <td><%= @db_info.self %></td>  
+	              <td><%= @db_info.printer %></td> 
+	              <td><%= @db_info.backup %></td>
+	              <td><%= @db_info.os %></td>        
+	            </tr>
+	          </tbody>
+	        </table>
+	      </div>
+	    </div>
+	</div>
+
+
+</div>

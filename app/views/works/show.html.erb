@@ -1,0 +1,58 @@
+<div class="container">
+  <div class="row" >
+    <div class="col d-flex justify-content-start">
+      <!--links-->
+      <%=" | "%><%= link_to 'TOP', root_path %><%=" | "%><%= link_to 'ユーザー一覧', use_cases_path %><%=" | "%><%= link_to '作業一覧', works_path %><%=" | "%>
+      <!--end links-->
+    </div>
+    <div class="col d-flex justify-content-end">
+      <%=" | "%><%= link_to '編集', edit_work_path %>
+      <%=" | "%><%= link_to '削除', @work, method: :delete, data: { confirm: 'Are you sure?' } %>
+      <%=" | "%>
+    </div>
+  </div>
+  <!--page header-->
+  <div class="row">
+    <div class="col title_bar">
+      <%= "作業情報"%>
+    </div>
+  </div>
+  <!--work no and use case name-->
+  <div class="row" >
+    <div class="col">
+      <div><%= @work.use_case_no %><%=" "%><%= @work.client_name %></div>
+    </div>
+    <div class="col d-flex justify-content-end">
+      <!--buttons for Fax..etc-->
+      <div><button>FAX to ユーザー</button><button>FAX to 販社</button><button>報告書</button></div>
+    </div>
+  </div>
+  <!--work_no datetime division and person in change-->
+  <div class="row" style="margin-bottom: 20px; margin-top: 20px">
+    <div class="col">
+      <div>
+        <%= "No."%>
+        <%= link_to @work.work_no, edit_work_path(@work)%>
+        <%= " "%><%= "日時："%><%= @work.created_at%>
+        <%= " "%><%= @work.classification%>
+        <%= " "%><%= "担当： "%><%= @work.worker_name%>
+      </div>
+    </div>
+  </div>
+  <div class="row" style="margin-bottom: 20px; margin-top: 20px">
+    <div class="col">
+      <!--subject-->
+      <div><%= @work.subject%></div>
+    </div>
+  </div>
+  <div class="row" style="margin-bottom: 20px; margin-top: 20px">
+      <div class="col">
+      <!--content-->
+      <div><%= @work.content%></div>
+    </div>
+  </div>
+  
+  	
+</div>
+
+

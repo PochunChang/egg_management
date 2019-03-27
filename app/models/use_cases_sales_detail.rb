@@ -1,0 +1,2 @@
+class UseCasesSalesDetail < ApplicationRecord
+end

@@ -1,0 +1,101 @@
+<div class="container">
+  <div class="row" >
+    <div class="col d-flex justify-content-start">
+      <!--links-->
+      <%=" | "%><%= link_to 'TOP', root_path %><%=" | "%><%= link_to 'ユーザー一覧', use_cases_path %><%=" | "%><%= link_to '作業一覧', works_path %><%=" | "%>
+      <!--end links-->
+    </div>
+    <div class="col d-flex justify-content-end">
+      <%=" | "%><%= link_to '編集', edit_event_path %><%=" | "%><%= link_to '削除', @event, method: :delete, data: { confirm: 'Are you sure?' } %><%=" | "%>
+    </div>
+  </div>
+  <!--page header-->
+  <div class="row">
+    <div class="col title_bar">
+      <%= "予定内容"%>
+    </div>
+  </div>
+  <div class="row" style="margin-bottom: 20px; margin-top: 20px">
+    <div class="col">
+      <strong><%="日付: "%></strong><%= @event.start_time %><%="～"%><%= @event.end_time %>
+    </div>
+    <div class="col-2">
+    </div>
+  </div>
+
+  <div class="row" style="margin-bottom: 20px; margin-top: 20px">
+    <div class="col">
+      <strong><%= "確定: " %></strong>
+      <%if @event.confirmed == true%>
+        <%= fa_icon('check-circle') %>
+      <%else%>
+        <%= fa_icon('times-circle') %>
+      <%end%>
+      <%= "(" %>
+      <%if @event.important == true%>
+        <span class="badge badge-danger">重</span>
+      <%end%>
+      <%if @event.rest == true%>
+        <span class="badge badge-danger">休</span>
+      <%end%>
+      <%if @event.lightbulb == true%>
+        <span style="color: gold"><%= fa_icon('bolt')%></span>
+      <%end%>
+      <%if @event.triangle == true%>
+        <span style="color: orange"><%= fa_icon('exclamation-triangle')%></span>
+      <%end%>
+      <%if @event.done == true%>
+        <span class="badge badge-info">済</span>
+      <%end%>
+      <%if @event.celebrate == true%>
+        <span class="badge badge-danger">祝</span>
+      <%end%>
+      <%if @event.star == true%>
+        <span style="color: gold"><%= fa_icon('star')%></span>
+      <%end%>
+      <%= ")" %>
+      
+    </div>
+  </div>
+  <div class="row" style="margin-bottom: 20px; margin-top: 20px">
+    <div class="col">
+      <strong><%= "交通手段: " %></strong><%= @event.transportation %>
+      <strong><%= "区分: " %></strong><%= @event.schedule_type %>
+    </div>
+  </div>
+
+  <div class="row" style="margin-bottom: 20px; margin-top: 20px">
+    <div class="col">
+      <strong><%= "訪問先名: " %></strong><%= @event.destination %>
+      <strong><%= "地域: " %></strong><%= @event.region %>
+      <strong><%= "仮払金額: " %></strong><%= @event.cost %>
+    </div>
+  </div>
+
+
+
+
+
+
+  <div class="row" style="margin-bottom: 20px; margin-top: 20px">
+    <div class="col">
+      <strong><%="内容: "%></strong><%= @event.title %>
+    </div>
+  </div>
+  <div class="row" style="margin-bottom: 20px; margin-top: 20px">
+    <div class="col">
+      <%= @event.content %>
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+
+</div>
+

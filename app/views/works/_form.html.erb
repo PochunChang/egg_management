@@ -1,0 +1,81 @@
+<%= form_with(model: work, local: true) do |form| %>
+  <% if work.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(work.errors.count, "error") %> prohibited this work from being saved:</h2>
+
+      <ul>
+      <% work.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
+  <!--hidden fields-->
+  <div class="field">
+    <%= form.hidden_field :use_case_no %>
+    <%= form.hidden_field :client_name %>
+  </div>
+  <!--end hidden fields-->
+
+  <div class="row" >
+    <div class="col d-flex justify-content-start">
+      <!--links-->
+      <%=" | "%><%= link_to 'TOP', root_path %><%=" | "%><%= link_to 'ユーザー一覧', use_cases_path %><%=" | "%><%= link_to '作業一覧', works_path %><%=" | "%>
+      <!--end links-->
+    </div>
+    <div class="col d-flex justify-content-end">
+      <%if(params.has_key?(:id))%>
+        <%= link_to 'キャンセル', work_path, :class=> 'btn btn-link ' %>
+      <%else%>
+        <%= link_to 'キャンセル', use_case_path(id: params[:use_case_id]), :class=> 'btn btn-link ' %>
+      <%end%>
+    </div>
+    <div class="actions ">
+      <!--passing param to controller for makeing association-->
+      <%= hidden_field_tag(:use_case_no, @work.use_case_no) %>
+      <!---->
+      <%= form.submit 'セーフ', :class=> 'btn btn-link '%>
+    </div>
+  </div>
+  <!--page header-->
+  <div class="row">
+    <div class="col title_bar">
+      <%= "作業編集"%>
+    </div>
+  </div>
+  <!--work no and use case name-->
+  <div class="row" >
+    <div class="col">
+      <div><%= @work.use_case_no %><%=" "%><%= @work.client_name %></div>
+    </div>
+    <div class="col d-flex justify-content-end">
+     
+    </div>
+  </div>
+  <!--work_no datetime division and person in change-->
+  <div class="row" style="margin-bottom: 20px; margin-top: 20px">
+    <div class="col">
+      <div>
+        <%= "No."%>
+        <%= form.text_field :work_no, :size => "5" %>
+        <%= " "%><%= "日時："%><%= form.text_field :created_at, :size => "25" %>
+        <%= " "%><%= form.text_field :classification, :size => "2" %>
+        <%= " "%><%= "担当： "%><%= form.text_field :worker_name, :size => "5" %>
+      </div>
+    </div>
+  </div>
+  <div class="row" style="margin-bottom: 20px; margin-top: 20px">
+    <div class="col">
+      <!--subject-->
+      <div><%= form.text_field :subject, :size => "30" %></div>
+    </div>
+  </div>
+  <div class="row" style="margin-bottom: 20px; margin-top: 20px">
+      <div class="col">
+      <!--content-->
+      <div><%= form.text_area :content, :size => "50x10" %></div>
+    </div>
+  </div>
+<% end %>

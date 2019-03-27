@@ -1,0 +1,2 @@
+class UseCaseLedger < ApplicationRecord
+end

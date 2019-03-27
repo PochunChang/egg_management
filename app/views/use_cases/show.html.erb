@@ -1,0 +1,277 @@
+<div class="container">
+  <div class="row" >
+    <div class="col d-flex justify-content-start">
+      <!--links-->
+      <%=" | "%><%= link_to 'TOP', root_path %><%=" | "%><%= link_to 'ユーザー一覧', use_cases_path %><%=" | "%><%= link_to '作業一覧', works_path %><%=" | "%><%= link_to '印刷'%><%=" | "%>
+      <!--end links-->
+    </div>
+    <div class="col d-flex justify-content-end">
+      <%=" | "%><%= link_to '編集', edit_use_case_path %><%=" | "%><%= link_to '削除', @use_case, method: :delete, data: { confirm: 'Are you sure?' } %><%=" | "%>
+    </div>
+  </div>
+  <!--page header-->
+  <div class="row">
+    <div class="col title_bar">
+      <%= "ユーザー情報"%>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col align-self-center">
+      <!--bunch of No.-->
+      <div><%=" | "%><%= @use_case.use_case_no %><%=""%><%=" | "%><%="売No."%><%=@use_case.sales_no%><%=" | "%><%="見No."%><%=@use_case.lookup_no%><%=" | "%>
+        <%="作No."%><%=@use_case.project_no%><%=" | "%></div>
+    </div>
+    <!--progress table-->
+    <div class="col">
+      <div>
+        <table class="table table-bordered table-sm">
+          <thead class="thead-light">
+            <tr>
+              <th>導入日</th>
+              <th>経過</th>
+              <th>期限</th>
+              <th>残期間</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><%= @use_case.introduction_date%></td>
+              <td><%= @use_case.time_passed%></td>
+              <td><%= @use_case.due_date%></td>
+              <td><%= @use_case.time_remaining%>ヶ月</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <!--person in charge table-->
+    <div class="col">
+      <div>
+        <table class="table table-bordered table-sm" style="font-size: 14px">
+          <thead class="thead-light">
+            <tr>
+              <th>営業担当</th>
+              <th>納品担当</th>
+              <th>指導担当</th>
+              <th>ﾌﾟﾛｼﾞｪｸﾄR</th>
+              <th>ﾌﾟﾛｸﾞﾗﾑ</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><%= @use_case.sales_person %></td>
+              <td><%= @use_case.delivery_person %></td>
+              <td><%= @use_case.superviser %></td>
+              <td><%= @use_case.project_person %></td>
+              <td><%= @use_case.program_person %></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <!--client name and product name-->
+  <div class="row">
+    <div class="col use_case_name_box">
+      <div>
+        <b><%= @use_case.client_name %></b><br />
+        <b><%= @use_case.product_name %><%=" / "%><%= @use_case.mod %></b>
+      </div>
+    </div>
+    <!--id and connection table-->
+    <div class="col">
+      <div>
+        <div><%="【 ID発行数："%><%= @use_case.id_issued %><%=" / "%><%="同時接続数："%><%= @use_case.sc_count %><%=" 】"%></div>
+        <table class="table table-bordered table-sm">
+          <thead class="thead-light">
+            <tr>
+              <th>TEL</th><td><%= @use_case.tel %></td>
+              <th>ﾘﾓｰﾄ</th><td><%= @use_case.remote %></td>
+              <th>指導</th><td><%= @use_case.supervision_count %>回</td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th style="background-color:  whitesmoke">保　守</th><td class="text-center" colspan="5"><%= @use_case.hoshu %></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <!--store table-->
+    <div class="col">
+      <div>
+        <table class="table table-bordered table-sm">
+          <thead class="thead-light">
+            <tr>
+              <th rowspan="2" width="60">販売店</th><td><%= @use_case.so_name %></td><th>担当者</th><td><%= @use_case.so_pic %></td>
+            </tr>
+            <tr>
+              <td colspan="3">
+                <%= @use_case.so_address1 %>
+                <%= @use_case.so_address2 %>
+                <%= @use_case.so_address3 %><br />
+                TEL: <%= @use_case.so_tel %> FAX: <%= @use_case.so_fax %>
+              </td>         
+            </tr>
+            <tr>
+              <th>販  社</th><td colspan="3"><%= @use_case.sc_name %>TEL:<%= @use_case.sc_tel %></td>        
+            </tr>
+          </thead>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col">
+      <!--memo link-->
+      <table>
+        <thead>
+          <th><%= "MEMO"%></th>
+        </thead>
+        <tbody>
+          <td><%= @use_case.memo %></td>
+        </tbody>
+      </table>
+      
+
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <!--extra info-->
+      <div>
+        <table>
+          <thead>
+            <tr>
+              <th><%='[情報]'%></th>
+              <th>業種：</th><td><%= @use_case.industry %></td>
+              <th>扱い商品：</th><td><%= @use_case.service_product %></td>
+              <th>商品点数：</th><td><%= @use_case.product_count %></td>
+              <th>得意先件数：</th><td><%= @use_case.customer_count %></td><td>件</td>
+              <th>仕入(傭車)先件数：</th><td><%= @use_case.vendor_count %></td><td>件</td>
+              <th>車両台数：</th><td><%= @use_case.vehicle_count %></td><td>台</td>
+              <th>担当者(乗務員)数：</th><td><%= @use_case.driver_count %></td><td>人</td>
+            </tr>          
+          </thead>
+        </table>
+      </div>
+    </div>    
+  </div>
+
+
+  <hr>
+
+
+  <div class="row">
+    <div class="col">
+      <div>
+          <%="■　ハード情報　■"%><%="  "%>  
+      </div>
+      <div>
+        <table class="table table-bordered table-sm">
+          <thead>
+            <tr>
+              <th>No</th>
+              <th>名称</th>
+              <th>担当者</th>
+              <th>住所</th>
+              <th>TEL</th>
+              <th>FAX</th>
+              <th>接続数</th>
+              <th>備考</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @use_case.hard_infos.each do |h|%>
+            <tr>            
+              <td><%= link_to h.denban, hard_info_path(id: h.id) %></td>
+              <td><%= h.c_office %></td>
+              <td><%= h.c_pic %></td>
+              <td><%= h.c_address1 %><%= h.c_address2 %><%= h.c_address3 %></td>
+              <td><%= h.c_tel %></td>   
+              <td><%= h.c_fax %></td> 
+              <td><%= h.sc_count %><%="/"%><%= h.id_issued %></td> 
+              <td><%= h.remark %></td>
+              <td></td>          
+            </tr>
+            <%end%>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+
+  <hr>
+
+  
+  <div class="row">
+    <div class="col ">
+      <!--work record-->
+      <div>
+        <div>
+          <%="■　作業記録　■"%><%="  "%><%= link_to '新規追加', new_work_path(:use_case_id => @use_case.id)%>    
+        </div>
+        <div>
+          <table class="table table-bordered table-sm">
+            <thead style="background-color: lavender">
+              <tr>
+                <th>No</th>
+                <th>日付</th>
+                <th>担当者</th>
+                <th>区分</th>
+                <th>件名</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @use_case.works.reverse_each do |w|%>
+              <tr>            
+                <td><%= link_to w.work_no, work_path(id: w.id) %></td>
+                <td><%= w.updated_at %></td>
+                <td><%= w.worker_name %></td>
+                <td><%= w.classification %></td>
+                <td><%= w.subject %></td>            
+              </tr>
+              <%end%>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <!--sale details-->
+      <div>
+        <div>
+          <%="■　売上明細　■"%><%= link_to '新規追加', new_sales_detail_path(:use_case_id => @use_case.id)%>
+        </div>
+        <div>
+          <table class="table table-bordered table-sm">
+            <thead style="background-color: lavender">
+              <tr>
+                <th>No</th>
+                <th>日付</th>
+                <th>名称</th>
+                <th>売上額</th>
+                <th>改造費</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @use_case.sales_details.reverse_each do |s|%>
+              <tr>           
+                <td><%= link_to s.sd_no, sales_detail_path(id: s.id) %></td>
+                <td><%= s.date %></td>
+                <td><%= s.product_name %></td>
+                <td><%= number_with_delimiter(s.sales_amount, :delimiter => ',') %></td>
+                <td><%= number_with_delimiter(s.customize_cost, :delimiter => ',') %></td>            
+              </tr>
+              <%end%>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

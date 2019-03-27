@@ -1,0 +1,14 @@
+<div class="container">
+	<h>This is the home page</h>
+	<br/>
+	<%= link_to 'ユーザー管理', use_cases_path%>
+	<%=" | "%>
+	<%= link_to '作業一覧', works_path%>
+	<%=" | "%>
+	<%= link_to 'スケジュール', events_path%>
+	<%=" | "%>
+	<%= link_to 'ユーザー台帳', use_case_ledgers_path%>
+	<br/>
+	<br/>
+	<%= link_to 'sign out', destroy_user_session_path, method: :delete%><br/>
+</div>

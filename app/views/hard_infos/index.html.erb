@@ -1,0 +1,41 @@
+<div class="container">
+  <h1>Hard Infos</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>Hard info no</th>
+        <th>Store name</th>
+        <th>Worker name</th>
+        <th>Address</th>
+        <th>Tel</th>
+        <th>Fax</th>
+        <th>Connection current</th>
+        <th>Connection max</th>
+        <th>Memo</th>
+        <th>Usecase</th>
+        <th colspan="3"></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @hard_infos.each do |hard_info| %>
+        <tr>
+          <td><%= hard_info.denban %></td>
+          <td><%= hard_info.store_name %></td>
+          <td><%= hard_info.worker_name %></td>
+          <td><%= hard_info.address %></td>
+          <td><%= hard_info.tel %></td>
+          <td><%= hard_info.fax %></td>
+          <td><%= hard_info.connection_current %></td>
+          <td><%= hard_info.connection_max %></td>
+          <td><%= hard_info.remark %></td>
+          <td><%= hard_info.use_case_id %></td>
+          <td><%= link_to 'Edit', edit_hard_info_path(hard_info) %></td>
+          <td><%= link_to 'Destroy', hard_info, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <br>
+  <%= link_to 'New Hard Info', new_hard_info_path %>
+</div>

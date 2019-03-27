@@ -1,0 +1,104 @@
+<%= form_with(model: event, local: true) do |form| %>
+  <% if event.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(event.errors.count, "error") %> prohibited this event from being saved:</h2>
+
+      <ul>
+      <% event.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <!--hidden fields-->
+  <div class="field">
+    <%= form.hidden_field :user_id %>
+  </div>
+  <!--end hidden fields-->
+
+
+  <div class="row">
+    <div class="col d-flex justify-content-start ">      
+      <%=" | "%><%= link_to 'TOP', root_path %><%=" | "%><%= link_to 'ユーザー一覧', use_cases_path %><%=" | "%>
+    </div>
+    <div class="col d-flex justify-content-end">
+      <%if(params.has_key?(:id))%>
+        <%= link_to 'キャンセル', event_path, :class=> 'btn btn-link ' %>
+      <%else%>
+        <%= link_to 'キャンセル', events_path, :class=> 'btn btn-link ' %>
+      <%end%>
+    </div>
+    <div class="actions ">
+      <%= form.submit 'セーフ', :class=> 'btn btn-link'%>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col title_bar">
+      <%= "予定編集"%>
+    </div>
+  </div>
+
+
+
+  <div class="row" style="margin-bottom: 20px; margin-top: 20px">
+    <div class="col">
+      <strong><%="日付: "%></strong>
+      <%= form.datetime_select :start_time, {:use_month_names => ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月','十二月']} %>
+      <strong><%="～"%></strong>
+      <%= form.datetime_select :end_time, {:use_month_names => ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月','十二月']} %>
+    </div>
+    <div class="col-2">
+    </div>
+  </div>
+
+  <div class="row" style="margin-bottom: 20px; margin-top: 20px">
+    <div class="col">
+      <strong><%= "確定: " %></strong><%= form.check_box :confirmed %>
+      <%= "(" %>
+      <span class="badge badge-danger">重</span><%= form.check_box :important %>
+      <span class="badge badge-danger">休</span><%= form.check_box :rest %>
+      <span style="color: gold"><%= fa_icon('bolt')%></span><%= form.check_box :lightbulb %>
+      <span style="color: orange"><%= fa_icon('exclamation-triangle')%></span><%= form.check_box :triangle %>
+      <span class="badge badge-info">済</span><%= form.check_box :done %>
+      <span class="badge badge-danger">祝</span><%= form.check_box :celebrate %>
+      <span style="color: gold"><%= fa_icon('star')%></span><%= form.check_box :star %>
+      <%= ")" %>
+    </div>
+  </div>
+  <div class="row" style="margin-bottom: 20px; margin-top: 20px">
+    <div class="col">
+      <strong><%= "交通手段: " %></strong><%= form.select :transportation, ['無し', '車', 'バス', '電車', '新幹線', '飛行機']%>
+      <strong><%= "区分: " %></strong><%= form.select :schedule_type, ['無し', 'デモ', '商談', '展覧', '勉強', '納品', '?', '打ち合わせ']%>
+    </div>
+  </div>
+
+  <div class="row" style="margin-bottom: 20px; margin-top: 20px">
+    <div class="col">
+      <strong><%= "訪問先名: " %></strong><%= form.text_field :destination, :size =>"20" %>
+      <strong><%= "地域: " %></strong><%= form.text_field :region, :size =>"20" %>
+      <strong><%= "仮払金額: " %></strong><%= form.text_field :cost, :size =>"10" %>
+    </div>
+  </div>
+
+
+
+
+  <div class="row" style="margin-bottom: 20px; margin-top: 20px">
+    <div class="col">
+      <strong><%="内容: "%></strong><%= form.text_field :title, :required => true, :size =>"50" %>
+    </div>
+  </div>
+  <div class="row" style="margin-bottom: 20px; margin-top: 20px">
+    <div class="col">
+      <%= form.text_area :content, :size =>"50x10" %>
+    </div>
+  </div>
+
+  
+
+  
+
+
+
+<% end %>

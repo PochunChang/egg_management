@@ -1,0 +1,83 @@
+<%= form_with(model: db_info, local: true) do |form| %>
+  <% if db_info.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(db_info.errors.count, "error") %> prohibited this db_info from being saved:</h2>
+
+      <ul>
+      <% db_info.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
+
+  <!--hidden fields-->
+  <div class="field">
+    <%= form.hidden_field :hard_info_id %>
+  </div>
+  <!--end hidden fields-->
+
+
+
+
+  <div class="row" >
+    <div class="col d-flex justify-content-start">
+      <!--links-->
+      <%=" | "%><%= link_to 'TOP', root_path %><%=" | "%><%= link_to 'ユーザー一覧', use_cases_path %><%=" | "%><%= link_to '作業一覧', works_path %><%=" | "%>
+      <!--end links-->
+    </div>
+    <div class="col d-flex justify-content-end">
+      <%if(params.has_key?(:id))%>
+        <%= link_to 'キャンセル', db_info_path, :class=> 'btn btn-link ' %>
+      <%else%>
+        <%= link_to 'キャンセル', hard_info_path(id: params[:hard_info_id]), :class=> 'btn btn-link ' %>
+      <%end%>
+    </div>
+    <div class="actions ">
+      <%= form.submit 'セーフ', :class=> 'btn btn-link '%>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col title_bar_hard">
+      <%= "ハード構成登録"%>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <div>
+        <table class="table table-bordered table-sm">
+          <thead>
+            <tr>
+              <th>No</th>
+              <th>ｼﾘｱﾙNo</th>
+              <th>ID</th>
+              <th>IP</th>
+              <th>ﾃﾞｰﾀﾍﾞｰｽ名</th>
+              <th>名称</th>
+              <th>本体</th>
+              <th>ﾌﾟﾘﾝﾀ</th>
+              <th>ﾊﾞｯｸｱｯﾌﾟ</th>
+              <th>OS</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>            
+              <td><%= form.text_field :db_info_no, :size =>"4" %></td>
+              <td><%= form.text_field :serial_no, :size =>"4" %></td>
+              <td><%= form.text_field :identification, :size =>"4" %></td>
+              <td><%= form.text_field :ip, :size =>"4" %></td>
+              <td><%= form.text_field :db_name, :size =>"4" %></td>   
+              <td><%= form.text_field :name, :size =>"4" %></td>
+              <td><%= form.text_field :self, :size =>"4" %></td>  
+              <td><%= form.text_field :printer, :size =>"4" %></td> 
+              <td><%= form.text_field :backup, :size =>"4" %></td>
+              <td><%= form.text_field :os, :size =>"4" %></td>        
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+<% end %>

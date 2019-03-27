@@ -1,0 +1,2 @@
+module HardInfosHelper
+end

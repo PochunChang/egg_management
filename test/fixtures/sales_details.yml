@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  sd_no: 1
+  date: MyString
+  product_name: MyString
+  sales_amount: 1
+  customize_cost: 1
+  use_case: one
+
+two:
+  sd_no: 1
+  date: MyString
+  product_name: MyString
+  sales_amount: 1
+  customize_cost: 1
+  use_case: two

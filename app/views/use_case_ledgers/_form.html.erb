@@ -1,0 +1,111 @@
+<%= form_with(model: use_case_ledger, local: true) do |form| %>
+  <% if use_case_ledger.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(use_case_ledger.errors.count, "error") %> prohibited this use_case_ledger from being saved:</h2>
+
+      <ul>
+      <% use_case_ledger.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
+
+
+
+
+
+
+
+  <div class="row">
+    <div class="col d-flex justify-content-start ">      
+      <%=" | "%><%= link_to 'TOP', root_path %><%=" | "%>
+    </div>
+    <div class="col d-flex justify-content-end">
+      <%if(params.has_key?(:id))%>
+        <%= link_to 'キャンセル', use_case_ledger_path, :class=> 'btn btn-link ' %>
+      <%else%>
+        <%= link_to 'キャンセル', use_case_ledgers_path, :class=> 'btn btn-link ' %>
+      <%end%>
+    </div>
+    <div class="actions ">
+      <%= form.submit 'セーフ', :class=> 'btn btn-link'%>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col title_bar">
+      <%= "ユーザー台帳編集"%>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <table class="table table-bordered table-sm">
+        <thead class="thead-light">
+          <tr>
+            <th>コード</th><td><%= form.text_field :use_case_code, :size =>"5" %></td>
+          </tr>
+          <tr>
+            <th>名称</th><td><%= form.text_field :c_name, :size =>"30" %></td>
+          </tr>
+          <tr>
+            <th>フリガナ</th><td><%= form.text_field :c_furigana %></td>
+          </tr>
+          <tr>
+            <th>正式名称</th><td><%= form.text_field :c_official_name, :size =>"30" %></td>
+          </tr>
+          <tr>
+            <th>担当者名</th><td><%= form.text_field :c_pic %></td>
+          </tr>
+          <tr>
+            <th>代表者</th><td><%= form.text_field :c_rep_role %><%=" "%><%= form.text_field :c_rep_last_name %><%=" "%><%= form.text_field :c_rep_first_name %></td>
+          </tr>
+          <tr>
+            <th>区分</th><td><%= form.text_field :c_office, :size =>"10" %></td>
+          </tr>
+          <tr>
+            <th>〒</th><td><%= form.text_field :c_postal_code %></td>
+          </tr>
+          <tr>
+            <th>住所1</th><td><%= form.text_field :c_address1, :size =>"50" %></td>
+          </tr>
+          <tr>
+            <th>住所2</th><td><%= form.text_field :c_address2, :size =>"50" %></td>
+          </tr>
+          <tr>
+            <th>住所3</th><td><%= form.text_field :c_address3, :size =>"50" %></td>
+          </tr>
+          <tr>
+            <th>電話</th><td><%= form.text_field :c_tel %></td>
+          </tr>
+          <tr>
+            <th>FAX</th><td><%= form.text_field :c_fax %></td>
+          </tr>
+          <tr>
+            <th>ホームページ</th><td><%= form.text_field :c_homepage, :size =>"30" %></td>
+          </tr>
+          <tr>
+            <th>Email</th><td><%= form.text_field :c_email, :size =>"30" %></td>
+          </tr>
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+          </tr>
+        </thead>
+      </table>
+    </div>
+  </div>
+
+<% end %>

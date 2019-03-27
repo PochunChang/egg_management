@@ -1,0 +1,47 @@
+<div class="container">
+  <div class="row" >
+    <div class="col d-flex justify-content-start">
+      <!--links-->
+      <%=" | "%><%= link_to 'TOP', root_path %><%=" | "%><%= link_to 'ユーザー一覧', use_cases_path %><%=" | "%><%= link_to '作業一覧', works_path %><%=" | "%>
+      <!--end links-->
+    </div>
+    <div class="col d-flex justify-content-end">
+      <div class="col d-flex justify-content-end">
+          <%=" | "%><%= link_to '編集', edit_sales_detail_path(@sales_detail) %>
+          <%=" | "%><%= link_to '削除', @sales_detail, method: :delete, data: { confirm: 'Are you sure?' } %>
+          <%=" | "%>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col title_bar">
+      <%= "売上明細"%>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <div>
+        <table class="table table-bordered table-sm">
+          <thead>
+            <tr>
+              <th>No</th>
+              <th>日付</th>
+              <th>名称</th>
+              <th>売上額</th>
+              <th>改造費</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>            
+              <td><%= @sales_detail.sd_no %></td>
+              <td><%= @sales_detail.date %></td>
+              <td><%= @sales_detail.product_name %></td>
+              <td><%= @sales_detail.sales_amount %></td>
+              <td><%= @sales_detail.customize_cost %></td>           
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
